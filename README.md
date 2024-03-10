@@ -4,7 +4,7 @@ This project leverages the Spotify API to conduct sentiment analysis, uncovering
 ## Collaborators
 
 - [@cfermarvill](https://github.com/cfermarvill) 
-- [@carloss_sanjuan](https://github.com/carloss_sanjuan) 
+- [@carlossanjuan26](https://github.com/carlossanjuan26) 
   
 ## Getting Started with the Spotify API
 
