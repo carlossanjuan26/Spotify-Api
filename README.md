@@ -1,6 +1,11 @@
 # Spotify-Api
 This project leverages the Spotify API to conduct sentiment analysis, uncovering the emotional trends within music selections.
 
+## Collaborators
+
+- [@cfermarvill](https://github.com/cfermarvill) 
+- [@carloss_sanjuan](https://github.com/carloss_sanjuan) 
+  
 ## Getting Started with the Spotify API
 
 To utilize the Spotify API it will be necessary follow these initial setup steps:
