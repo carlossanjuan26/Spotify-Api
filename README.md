@@ -26,8 +26,8 @@ In your app's Dashboard, go to `Settings` to find your `Client ID` and `Client S
 
 This step is very important, so pay attention. You have to create a text file called `.env`. You can do this from R, by clicking on the top left to generate a new file and more specifically by clicking on `Text files`. Inside that file you should put the following:
 
-- "client_id=YourPasswordHere". With YourPasswordHere being your actual Client ID.
-- "client_secret=YourPasswordHere". With YourPasswordHere being your actual Client Secret.
+- "client_id=YourPasswordHere". With `YourPasswordHere` being your actual `Client ID`.
+- "client_secret=YourPasswordHere". With `YourPasswordHere` being your actual `Client Secret`.
 
 You only have to write in the file what contains the inverted commas with `YourPasswordHere` being your real passwords.
 
