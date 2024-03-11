@@ -31,7 +31,7 @@ This step is very important, so pay attention. You have to create a text file ca
 
 You only have to write in the file what contains the inverted commas with `YourPasswordHere` being your real passwords.
 
-It's advisable to save these files in the same directory as your project for easy access. These files are essential for authenticating your requests to the Spotify API.
+It is recommended that you save them in the same folder that you have saved this work in order to have it located and easy to access, because we will use them later.
 
 ### Congratulations!
 
