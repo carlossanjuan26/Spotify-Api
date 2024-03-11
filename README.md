@@ -24,10 +24,12 @@ In your app's Dashboard, go to `Settings` to find your `Client ID` and `Client S
 
 ### Step 3: Setting Up Environment
 
-Create two text files to store your credentials securely:
+This step is very important, so pay attention. You have to create a text file called `.env`. You can do this from R, by clicking on the top left to generate a new file and more specifically by clicking on `Text files`. Inside that file you should put the following:
 
-- `client_id.txt`: Contains only your `Client ID`.
-- `secret_id.txt`: Contains your `Client Secret`.
+- "client_id=YourPasswordHere". With YourPasswordHere being your actual Client ID.
+- "client_secret=YourPasswordHere". With YourPasswordHere being your actual Client Secret.
+
+You only have to write in the file what contains the inverted commas with `YourPasswordHere` being your real passwords.
 
 It's advisable to save these files in the same directory as your project for easy access. These files are essential for authenticating your requests to the Spotify API.
 
