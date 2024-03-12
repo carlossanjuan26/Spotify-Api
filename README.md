@@ -39,7 +39,7 @@ You're all set to start using the Spotify API for your sentiment analysis projec
 
 ## Some recommendations
 
-We highly recommend running the first chunk first of all, to see if the secret codes have been saved correctly. And if they have run perfectly, then you can knit with no problem.
+In fisrt place, We highly recommend running the first two chunks, to see if the secret codes have been saved correctly. And if they have run perfectly, then you can knit with no problem.
 
 ### Additional information
 
