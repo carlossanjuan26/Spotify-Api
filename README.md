@@ -37,6 +37,11 @@ It is recommended that you save the file `.env` in the same folder that you have
 
 You're all set to start using the Spotify API for your sentiment analysis project. This setup is the foundation for exploring the vast musical landscape through data and uncovering insights about emotional trends and preferences in music.
 
+## Some recommendations
+
+We highly recommend running the first chunk first of all, to see if the secret codes have been saved correctly. And if they have run perfectly, then you can knit with no problem.
+
 ### Additional information
 
 You will find the same information with a bit more detail in the final script. It's necessary to follow these steps accurately in order to execute our code flawlessly. Once you do it correctly, you will be able to enjoy our work :)
+
