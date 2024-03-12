@@ -280,7 +280,17 @@ First, we will begin by giving a brief overview of the main characteristics of t
 
 Before that, I will provide a series of definitions of the variables we will use in the analysis, so when the results come out upon executing the code, you can understand my mood if you use my playlist, or yours, in case you have modified the original link for yours. In any case, we cannot directly discuss the obtained results since these can change over time. Let's go through them:
 
-**- Danceability**: Danceability describes how suitable a track is for dancing based on a combination of musical elements including tempo, rhythm stability, beat strength, and overall regularity. A value of 0.0 is least danceable and 1.0 is most danceable. **- Energy**: Energy is a measure from 0.0 to 1.0 and represents a perceptual measure of intensity and activity. Typically, energetic tracks feel fast, loud, and noisy. For example, death metal has high energy, while a Bach prelude scores low on the scale. Perceptual features contributing to this attribute include dynamic range, perceived loudness, timbre, onset rate, and general entropy. **- Instrumentalness**: Predicts whether a track contains no vocals. "Ooh" and "aah" sounds are treated as instrumental in this context. Rap or spoken word tracks are clearly "vocal". The closer the instrumentalness value is to 1.0, the greater likelihood the track contains no vocal content. Values above 0.5 are intended to represent instrumental tracks, but confidence is higher as the value approaches 1.0. **- Liveness**: Detects the presence of an audience in the recording. Higher liveness values represent an increased probability that the track was performed live. A value above 0.8 provides strong likelihood that the track is live. **- Speechiness**: Speechiness detects the presence of spoken words in a track. The more exclusively speech-like the recording (e.g., talk show, audiobook, poetry), the closer to 1.0 the attribute value. Values above 0.66 describe tracks that are probably made entirely of spoken words. Values between 0.33 and 0.66 describe tracks that may contain both music and speech, either in sections or layered, including such cases as rap music. Values below 0.33 most likely represent music and other non-speech-like tracks. **- Valence**: A measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. Tracks with high valence sound more positive (e.g., happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g., sad, depressed, angry).
+-   **Danceability**: Danceability describes how suitable a track is for dancing based on a combination of musical elements including tempo, rhythm stability, beat strength, and overall regularity. A value of 0.0 is least danceable and 1.0 is most danceable.
+
+-   **Energy**: Energy is a measure from 0.0 to 1.0 and represents a perceptual measure of intensity and activity. Typically, energetic tracks feel fast, loud, and noisy. For example, death metal has high energy, while a Bach prelude scores low on the scale. Perceptual features contributing to this attribute include dynamic range, perceived loudness, timbre, onset rate, and general entropy.
+
+-   **Instrumentalness**: Predicts whether a track contains no vocals. "Ooh" and "aah" sounds are treated as instrumental in this context. Rap or spoken word tracks are clearly "vocal". The closer the instrumentalness value is to 1.0, the greater likelihood the track contains no vocal content. Values above 0.5 are intended to represent instrumental tracks, but confidence is higher as the value approaches 1.0.
+
+-   **Liveness**: Detects the presence of an audience in the recording. Higher liveness values represent an increased probability that the track was performed live. A value above 0.8 provides strong likelihood that the track is live.
+
+-   **Speechiness**: Speechiness detects the presence of spoken words in a track. The more exclusively speech-like the recording (e.g., talk show, audiobook, poetry), the closer to 1.0 the attribute value. Values above 0.66 describe tracks that are probably made entirely of spoken words. Values between 0.33 and 0.66 describe tracks that may contain both music and speech, either in sections or layered, including such cases as rap music. Values below 0.33 most likely represent music and other non-speech-like tracks.
+
+-   **Valence**: A measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. Tracks with high valence sound more positive (e.g., happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g., sad, depressed, angry).
 
 ```{r}
 # Resumen estadístico
@@ -296,7 +306,14 @@ To illustrate these concepts more clearly, next, we will provide a chart that di
 
 ```{r}
 
-Bucle_long <- pivot_longer(Bucle_full, cols = c(danceability, energy, instrumentalness, liveness, speechiness, valence), names_to = "Feature", values_to = "Value")
+Bucle_long <- pivot_longer(Bucle_full, 
+                           cols = c(danceability, 
+                                    energy, 
+                                    instrumentalness, 
+                                    liveness, 
+                                    speechiness, 
+                                    valence), 
+                           names_to = "Feature", values_to = "Value")
 
 
 p <- ggplot(Bucle_long, aes(x = Feature, y = Value, fill = Feature)) +
@@ -330,14 +347,28 @@ Nonetheless, we believe that plotting each variable may be much more useful to g
 
 ```{r}
 dance <- Bucle_full |> 
-  ggplot(aes(x = Position, y = danceability, color = danceability, text = paste("Song: ", name, "\nAuthor: ", artist_name))) + # Incluyendo el nombre del autor
-  geom_point(size = 2, alpha = 0.7, shape = 18) + # Puntos más grandes y ligeramente transparentes
-  scale_color_gradientn(colors = c("#ff2a6d", "#fd8c25", "#faf834", "#48f23a", "#31faff", "#4250f2"),
+  ggplot(aes(x = Position, 
+             y = danceability, 
+             color = danceability, 
+             text = paste("Song: ", 
+                          name, "\nAuthor: ", 
+                          artist_name))) + 
+  geom_point(size = 2, alpha = 0.7, shape = 18) + 
+  scale_color_gradientn(colors = c("#ff2a6d", 
+                                   "#fd8c25", 
+                                   "#faf834", 
+                                   "#48f23a", 
+                                   "#31faff", 
+                                   "#4250f2"),
                         values = scales::rescale(c(0, 1)),
                         limits = c(0, 1),
-                        breaks = c(0, 0.25, 0.5, 0.75, 1), # Definir breaks para la escala
-                        labels = c("Static", "0.25", "0.5", "0.75", "Highly Danceable"), # Asignar las etiquetas adecuadas
-                        name = "") + # Paleta de colores personalizada
+                        breaks = c(0, 0.25, 0.5, 0.75, 1), 
+                        labels = c("Static", 
+                                   "0.25", 
+                                   "0.5", 
+                                   "0.75", 
+                                   "Highly Danceable"), 
+                        name = "") +
   expand_limits(y = c(0.25, 1)) +
   labs(
     title = "Let's Dance!",
@@ -384,13 +415,25 @@ In this chart, we can see the distribution of songs, with those closest to the x
 ```{r}
 
 valence <- Bucle_full |> 
-  ggplot(aes(x = Position, y = valence, color = valence, text = paste("Song: ", name, "\nAuthor: ", artist_name))) +
+  ggplot(aes(x = Position, 
+             y = valence, 
+             color = valence, 
+             text = paste("Song: ", 
+                          name, "\nAuthor: ", 
+                          artist_name))) +
   geom_point(size = 2, alpha = 0.7, shape = 18) + 
-  scale_color_gradientn(colors = c("#ff2a6d", "#fd8c25", "#faf834", "#48f23a", "#31faff", "#4250f2"),
+  scale_color_gradientn(colors = c("#ff2a6d", 
+                                   "#fd8c25", 
+                                   "#faf834", 
+                                   "#48f23a", 
+                                   "#31faff", 
+                                   "#4250f2"),
                         values = scales::rescale(c(0, 1)),
                         limits = c(0, 1),
                         breaks = c(0, 0.25, 0.5, 0.75, 1), 
-                        labels = c("Melancholy", "0.25", "0.5", "0.75", "Joy"), 
+                        labels = c("Melancholy", 
+                                   "0.25", "0.5", 
+                                   "0.75", "Joy"), 
                         name = "") + 
   expand_limits(y = c(0.25, 1)) +
   labs(
@@ -411,8 +454,6 @@ valence <- Bucle_full |>
   guides(color = guide_colourbar(title.position = "top", title.hjust = 0.5))
 
 
-
-# Convertir a ggplotly para interactividad, especificando las tooltips
 valence_plotly <- ggplotly(valence, tooltip = c("text", "color")) |> 
   layout(
     annotations = list(
@@ -438,13 +479,24 @@ In this graph you can see the state of your emotions.
 
 ```{r}
 energy <- Bucle_full |> 
-  ggplot(aes(x = Position, y = energy, color = energy, text = paste("Song: ", name, "\nAuthor: ", artist_name))) +
+  ggplot(aes(x = Position, 
+             y = energy, 
+             color = energy, 
+             text = paste("Song: ", name, "\nAuthor: ", 
+                          artist_name))) +
   geom_point(size = 2, alpha = 0.7, shape = 18) + 
-  scale_color_gradientn(colors = c("#ff2a6d", "#fd8c25", "#faf834", "#48f23a", "#31faff", "#4250f2"),
+  scale_color_gradientn(colors = c("#ff2a6d", 
+                                   "#fd8c25", 
+                                   "#faf834", 
+                                   "#48f23a", 
+                                   "#31faff", 
+                                   "#4250f2"),
                         values = scales::rescale(c(0, 1)),
                         limits = c(0, 1),
                         breaks = c(0, 0.25, 0.5, 0.75, 1), 
-                        labels = c("Low Energy", "0.25", "0.5", "0.75", "High Energy"), 
+                        labels = c("Low Energy", 
+                                   "0.25", "0.5", 
+                                   "0.75", "High Energy"), 
                         name = "") + # Nombre de la leyenda
   expand_limits(y = c(0.25, 1)) +
   labs(
@@ -562,7 +614,9 @@ In this section, we will compare the results obtained from the previous charts. 
 
 ```{r}
 
-dance <- ggplot(final_df_songs, aes(x = danceability, fill = playlist, text = paste("Playlist:", playlist))) +
+dance <- ggplot(final_df_songs, aes(x = danceability, 
+                                    fill = playlist, 
+                                    text = paste("Playlist:", playlist))) +
   geom_density(alpha = 0.7, color = NA) +
   scale_fill_manual(values = c("#40E0D0", "#FF00FF")) +
   labs(
@@ -606,7 +660,9 @@ dance_plotly
 ```
 
 ```{r}
-valence <- ggplot(final_df_songs, aes(x = valence, fill = playlist, text = paste("Playlist:", playlist))) +
+valence <- ggplot(final_df_songs, aes(x = valence, 
+                                      fill = playlist, 
+                                      text = paste("Playlist:", playlist))) +
   geom_density(alpha = 0.7, color = NA) +
   scale_fill_manual(values = c("#40E0D0", "#FF00FF")) + 
   labs(
@@ -647,7 +703,9 @@ valence_plotly
 ```
 
 ```{r}
-energy <- ggplot(final_df_songs, aes(x = energy, fill = playlist, text = paste("Playlist:", playlist))) +
+energy <- ggplot(final_df_songs, aes(x = energy, 
+                                     fill = playlist, 
+                                     text = paste("Playlist:", playlist))) +
   geom_density(alpha = 0.7, color = NA) +
   scale_fill_manual(values = c("#40E0D0", "#FF00FF")) +
   labs(
@@ -1433,7 +1491,15 @@ my2024_mean
 We now have the sentiment averages for each year! Now let's put all the averages together in a single table to be able to analyse the evolution.
 
 ```{r}
-lista_dataframes <- list(my2016_mean, my2017_mean, my2018_mean, my2019_mean, my2020_mean, my2021_mean, my2022_mean, my2023_mean, my2024_mean)
+lista_dataframes <- list(my2016_mean, 
+                         my2017_mean, 
+                         my2018_mean, 
+                         my2019_mean, 
+                         my2020_mean, 
+                         my2021_mean, 
+                         my2022_mean, 
+                         my2023_mean, 
+                         my2024_mean)
 
 allyears <- bind_rows(lista_dataframes)
 
@@ -1447,7 +1513,12 @@ allyears$your_year <- as.numeric(allyears$your_year)
 
 df_long <- allyears |> 
   pivot_longer(cols = -your_year, names_to = "metric", values_to = "score") |> 
-  filter(metric %in% c("danceability", "energy", "speechiness", "acousticness", "instrumentalness", "valence"))
+  filter(metric %in% c("danceability", 
+                       "energy",
+                       "speechiness", 
+                       "acousticness", 
+                       "instrumentalness", 
+                       "valence"))
 
 colors <- c("danceability" = "#ba01ff",
             "energy" = "#02fcf3",
@@ -1531,7 +1602,8 @@ for (i in seq_along(artist_2024$id)) {
       followers = followers
     )
   } else {
-    message(paste("Error fetching artist info for ID:", artist_id24, "Status Code:", status_code(response24)))
+    message(paste("Error fetching artist info for ID:", 
+                  artist_id24, "Status Code:", status_code(response24)))
   }
 }
 
@@ -1560,7 +1632,8 @@ for (i in seq_along(artist_2016$id)) {
       followers = followers
     )
   } else {
-    message(paste("Error fetching artist info for ID:", artist_id16, "Status Code:", status_code(response16)))
+    message(paste("Error fetching artist info for ID:", 
+                  artist_id16, "Status Code:", status_code(response16)))
   }
 }
 
@@ -1594,8 +1667,12 @@ genre_counts24 <- genre_counts24 |>
 
 
 ggplot(genre_counts24, aes(x = genres, y = count)) +
-  geom_segment(aes(x = genres, xend = genres, y = 0, yend = count, color = ifelse(genres %in% top_genres, "#b6ff00", "grey")), size = 1) +
-  geom_point(aes(color = ifelse(genres %in% top_genres, "#ff0092", "grey")), size = 3) +
+  geom_segment(aes(x = genres, xend = genres, 
+                   y = 0, yend = count, 
+                   color = ifelse(genres %in% top_genres, "#b6ff00", "grey")), 
+               size = 1) +
+  geom_point(aes(color = ifelse(genres %in% top_genres, "#ff0092", "grey")), 
+             size = 3) +
   scale_color_identity() +  
   theme_minimal(base_size = 12) +  
   coord_flip() +  
@@ -1628,8 +1705,12 @@ genre_counts16 <- genre_counts16 |>
 
 
 ggplot(genre_counts16, aes(x = genres, y = count)) +
-  geom_segment(aes(x = genres, xend = genres, y = 0, yend = count, color = ifelse(genres %in% top_genres, "#02fcf3", "grey")), size = 1) +
-  geom_point(aes(color = ifelse(genres %in% top_genres, "#ff6f00", "grey")), size = 3) +
+  geom_segment(aes(x = genres, xend = genres, 
+                   y = 0, yend = count, 
+                   color = ifelse(genres %in% top_genres, "#02fcf3", "grey")), 
+               size = 1) +
+  geom_point(aes(color = ifelse(genres %in% top_genres, "#ff6f00", "grey")), 
+             size = 3) +
   scale_color_identity() +  
   theme_minimal(base_size = 10) +  
   coord_flip() +  
